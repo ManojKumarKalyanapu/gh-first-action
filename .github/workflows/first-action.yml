@@ -1,10 +1,10 @@
-name: First Workflow
-on: workflow_dispatch
-jobs:
-  first-job:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Print greeting
-        run: echo "Hello World!"
+name: First Workflow # First Action
+on: workflow_dispatch # Triggered manually
+jobs: # Define jobs to run
+  first-job: # Job name
+    runs-on: ubuntu-latest # Specify the OS to run on
+    steps: # Steps to execute in the job
+      - name: Print greeting # Step name
+        run: echo "Hello World!" # Command to run
       - name: Print goodbye
         run: echo "Done - bye!"
