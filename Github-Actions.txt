@@ -1,0 +1,68 @@
+GitHub Actions Overview: 
+GitHub Actions is a CI/CD (Continuous Integration / Continuous Deployment) tool built into GitHub that lets you automate tasks such as testing, building, and deploying your code.
+
+1.Workflows :
+A workflow is an automated process defined in a .yml file stored in the .github/workflows/ directory of your repo.
+A workflow is triggered by events like push, pull_request, schedule, or workflow_dispatch.
+
+example:
+
+name: Deploy App
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+Key Properties:
+name: Optional, descriptive name for your workflow.
+on: Defines the trigger (e.g., push, pull_request, etc.).
+jobs: Collection of one or more jobs that run as part of the workflow.
+
+2. Jobs
+A job is a set of steps executed on the same runner (virtual machine).
+Jobs run in parallel by default, unless specified with needs.
+
+example:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Step 1
+        run: echo "Building..."
+
+Key Properties:
+runs-on: The environment (runner) used (ubuntu-latest, windows-latest, etc.).
+steps: A sequence of operations the job performs.
+needs: Defines job dependencies (used to run jobs sequentially).
+
+3. Steps
+A step is a single task that can run a script, use an action, or check out code.
+Steps run sequentially within a job.
+
+example:
+
+steps:
+  - name: Checkout repository
+    uses: actions/checkout@v3
+
+  - name: Run tests
+    run: npm test
+
+Step Types:
+uses: Run an existing GitHub Action (e.g., actions/checkout).
+run: Execute shell commands/scripts.
+with: Pass input parameters to the action.
+env: Set environment variables.
+
+summary table:
+| Component | Purpose                           | Runs on              | Contains            |
+| --------- | --------------------------------- | -------------------- | ------------------- |
+| Workflow  | Defines the automation process    | Triggered by events  | One or more jobs    |
+| Job       | A set of steps run on the same VM | GitHub-hosted runner | One or more steps   |
+| Step      | Individual task in a job          | Within job context   | Commands or actions |
